@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import * as APP from 'app';
 
 import { UIPanel, UIText } from './libs/ui.js';
 import { UIBoolean } from './libs/ui.three.js';
