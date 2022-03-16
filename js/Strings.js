@@ -6,6 +6,26 @@ function Strings( config ) {
 
 		en: {
 
+      'app/version': '0.0.1-ALPHA',
+      'app/author': 'Team 8711',
+      'app/licence': 'MIT',
+      'app/date': 'Mar 16 2022',
+      
+      'app/threejs/version': 'r138',
+      'app/threejs/date': 'March 3 2022',
+      'app/threejs/editor/version': 'r138',
+      'app/threejs/editor/date': 'March 3 2022',
+
+      'app/text/version': 'Version',
+      'app/text/author': 'Made by',
+      'app/text/licence': 'Licence',
+      'app/text/date': 'Build Date',
+      
+      'app/text/threejs/version': 'ThreeJS Version',
+      'app/text/threejs/date': 'ThreeJS Date',
+      'app/text/threejs/editor/version': 'ThreeJS Editor Version',
+      'app/text/threejs/editor/date': 'ThreeJS Editor Date',
+        
 			'menubar/file': 'File',
 			'menubar/file/new': 'New',
 			'menubar/file/import': 'Import',
@@ -320,6 +340,8 @@ function Strings( config ) {
 			'sidebar/history': 'History',
 			'sidebar/history/persistent': 'persistent',
 
+      'sidebar/about': 'About',
+      
 			'toolbar/translate': 'Translate',
 			'toolbar/rotate': 'Rotate',
 			'toolbar/scale': 'Scale',

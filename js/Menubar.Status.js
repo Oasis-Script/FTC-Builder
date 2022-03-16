@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as APP from 'app';
 
 import { UIPanel, UIText } from './libs/ui.js';
 import { UIBoolean } from './libs/ui.three.js';
@@ -39,7 +40,7 @@ function MenubarStatus( editor ) {
 
 	} );
 
-	const version = new UIText( 'r' + THREE.REVISION );
+	const version = new UIText( 'v' + strings.getKey('app/version') );
 	version.setClass( 'title' );
 	version.setOpacity( 0.5 );
 	container.add( version );

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js editor</title>
+		<title>FTC Builder</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="apple-touch-icon" href="images/icon.png">
 		<link rel="manifest" href="manifest.json">
-		<link rel="shortcut icon" href="../files/favicon_white.ico" media="(prefers-color-scheme: dark)"/>
-		<link rel="shortcut icon" href="../files/favicon.ico" media="(prefers-color-scheme: light)" />
+		<link rel="shortcut icon" href="./files/favicon_white.ico" media="(prefers-color-scheme: dark)"/>
+		<link rel="shortcut icon" href="./files/favicon.ico" media="(prefers-color-scheme: light)" />
 	</head>
 	<body>
 		<link rel="stylesheet" href="css/main.css">
@@ -39,7 +39,7 @@
     
 		<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.9.6/dist/ffmpeg.min.js" defer></script>
 
-		<script src="../examples/js/libs/draco/draco_encoder.js"></script>
+		<script src="js/libs/draco/draco_encoder.js"></script>
 
 		<link rel="stylesheet" href="js/libs/codemirror/codemirror.css">
 		<link rel="stylesheet" href="js/libs/codemirror/theme/monokai.css">
@@ -77,13 +77,19 @@
 		<script type="importmap">
 			{
 				"imports": {
-					"three": "./js/libs/three.module.js"
+					"three": "./js/libs/three.module.js",
+          "logger": "./js/Logger.js",
+          "app": "./App.js"
 				}
 			}
 		</script>
 
 		<script type="module">
 
+      import { Logger } from 'logger';
+      const logger = new Logger();
+
+      logger.log('Importing');
 			import * as THREE from 'three';
 
 			import { Editor } from './js/Editor.js';
@@ -94,7 +100,7 @@
 			import { Sidebar } from './js/Sidebar.js';
 			import { Menubar } from './js/Menubar.js';
 			import { Resizer } from './js/Resizer.js';
-			import { VRButton } from '../examples/jsm/webxr/VRButton.js';
+			import { VRButton } from './js/webxr/VRButton.js';
 
 			window.URL = window.URL || window.webkitURL;
 			window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
@@ -107,35 +113,44 @@
 
 			//
 
+      logger.log('Starting Editor');
 			const editor = new Editor();
 
 			window.editor = editor; // Expose editor to Console
 			window.THREE = THREE; // Expose THREE to APP Scripts and Console
 			window.VRButton = VRButton; // Expose VRButton to APP Scripts
 
+      logger.log('Adding Viewport');
 			const viewport = new Viewport( editor );
 			document.body.appendChild( viewport.dom );
 
+      logger.log('Adding Toolbar');
 			const toolbar = new Toolbar( editor );
 			document.body.appendChild( toolbar.dom );
 
+      logger.log('Adding Script');
 			const script = new Script( editor );
 			document.body.appendChild( script.dom );
 
+      logger.log('Adding Player');
 			const player = new Player( editor );
 			document.body.appendChild( player.dom );
 
+      logger.log('Adding Sidebar');
 			const sidebar = new Sidebar( editor );
 			document.body.appendChild( sidebar.dom );
 
+      logger.log('Adding Menubar');
 			const menubar = new Menubar( editor );
 			document.body.appendChild( menubar.dom );
 
+      logger.log('Adding Resizer');
 			const resizer = new Resizer( editor );
 			document.body.appendChild( resizer.dom );
 
 			//
 
+      logger.log('Initializing Storage');
 			editor.storage.init( function () {
 
 				editor.storage.get( function ( state ) {
@@ -205,6 +220,7 @@
 			} );
 
 			//
+      logger.log('Adding Event Listeners');
 
 			document.addEventListener( 'dragover', function ( event ) {
 
@@ -270,15 +286,18 @@
 			}
 
 			// ServiceWorker
-
+      logger.log('Trying to Start Service Worker');
 			if ( 'serviceWorker' in navigator ) {
 
 				try {
 
 					navigator.serviceWorker.register( 'sw.js' );
-
-				} catch ( error ) {
-
+          logger.log('  Service Worker Started');
+          
+				} catch ( err ) {
+          logger.warn('  Service Worker Failed to Start');
+          logger.warn(`    ${err.name}`)
+          logger.warn(`    ${err.message}`)
 				}
 
 			}

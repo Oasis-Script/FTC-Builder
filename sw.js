@@ -151,6 +151,7 @@ const assets = [
 	'./js/Sidebar.Settings.Shortcuts.js',
 	'./js/Sidebar.Settings.Viewport.js',
 	'./js/Sidebar.Properties.js',
+  './js/Sidebar.About.js',
 	'./js/Sidebar.Object.js',
 	'./js/Sidebar.Geometry.js',
 	'./js/Sidebar.Geometry.BufferGeometry.js',
